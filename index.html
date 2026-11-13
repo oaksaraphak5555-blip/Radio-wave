@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>นักสื่อสารวิทยุ: เกมคลื่นวิทยุ</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eaf1f5;--card:#fff;--ink:#14213d;--mut:#5b6b82;--ac:#0b7a75;--ac2:#f2a900;--ok:#1d8f4e;--bad:#c8402f;--ln:#cfdae4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b2d;--card:#182740;--ink:#e8eef7;--mut:#9fb0c7;--ac:#37c2b8;--ac2:#ffc933;--ok:#4cd08a;--bad:#ff7b68;--ln:#2c3f5c}}
+*{box-sizing:inherit}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Sarabun,Tahoma,sans-serif}
+h1,h2,h3,.k{font-family:Kanit,Sarabun,sans-serif;margin:0}
+main{max-width:640px;margin:0 auto;padding:12px 14px 40px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0}
+h1{font-size:20px;line-height:1.2}
+.hud{display:flex;gap:8px;font-weight:600;font-size:14px}.hud span{background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:2px 10px}
+nav{display:flex;gap:6px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:6px 0;z-index:5}
+nav button{flex:1;font:inherit;font-family:Kanit,sans-serif;padding:9px 4px;border:2px solid var(--ln);background:var(--card);color:var(--ink);border-radius:10px;cursor:pointer}
+nav button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:14px;margin:12px 0}
+.card h2{font-size:18px;margin-bottom:4px}
+.mut{color:var(--mut);font-size:14px}
+button.b{font:inherit;font-family:Kanit,sans-serif;background:var(--ac2);color:#2a1d00;border:0;border-radius:10px;padding:10px 16px;cursor:pointer;margin-top:8px}
+button.b:disabled{opacity:.5}
+.opt{display:block;width:100%;text-align:left;font:inherit;background:var(--bg);color:var(--ink);border:2px solid var(--ln);border-radius:10px;padding:9px 12px;margin:6px 0;cursor:pointer}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 18%,var(--card))}
+.opt.sel{border-color:var(--ac)}
+.fb{margin-top:6px;font-size:15px}.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+input[type=number]{font:inherit;width:120px;padding:8px;border:2px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ac)}
+.dial{text-align:center;background:var(--ink);color:var(--bg);border-radius:12px;padding:12px;margin:8px 0}
+.dial .k{font-size:34px;color:var(--ac2)}
+.dial div{font-size:14px}
+canvas#c3{width:100%;height:clamp(230px,42vw,400px);display:block;touch-action:pan-y;background:radial-gradient(circle at 30% 30%,#24406b,#0f1b2d);border-radius:12px;margin:8px 0;cursor:grab}label{font-weight:600;display:block;margin-top:6px}
+details{border-top:1px solid var(--ln);padding:6px 0}summary{cursor:pointer;font-weight:600}
+.bar{height:10px;background:var(--ln);border-radius:6px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--ac);width:0;transition:width .3s}
+.big{font-size:40px;font-family:Kanit;color:var(--ac)}
+code{background:var(--bg);padding:1px 6px;border-radius:6px}
+html{-webkit-text-size-adjust:100%}nav{overflow-x:auto;scrollbar-width:none}nav button{flex:0 0 auto;white-space:nowrap;padding:9px 14px}
+#p3d canvas#c3{height:clamp(320px,64vh,680px)}
+.tip{background:color-mix(in srgb,var(--ac2) 22%,var(--card));border-left:5px solid var(--ac2);border-radius:8px;padding:10px 12px;margin:8px 0;font-size:15px}
+.pn{display:flex;justify-content:space-between;gap:8px;margin-top:10px}.pn .b{flex:1}
+body{background:radial-gradient(1200px 500px at 85% -10%,color-mix(in srgb,var(--ac) 26%,transparent),transparent),radial-gradient(900px 400px at -10% 10%,color-mix(in srgb,var(--ac2) 20%,transparent),transparent),var(--bg);background-attachment:fixed}
+.top{background:linear-gradient(135deg,#0b7a75,#1b3d7a 70%,#3b2a7a);color:#fff;border-radius:18px;padding:14px 16px;margin:6px 0 4px;box-shadow:0 8px 24px rgba(11,40,80,.25)}
+h1{font-size:22px;letter-spacing:.2px}
+.hud span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff}
+nav{padding:8px 2px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 80%,transparent)}
+nav button{border-radius:999px;box-shadow:0 1px 2px rgba(0,0,0,.08);transition:.2s}
+nav button.on{background:linear-gradient(135deg,var(--ac),#1b6fb5);box-shadow:0 4px 12px rgba(11,122,117,.4);transform:translateY(-1px)}
+.card{border-radius:20px;box-shadow:0 6px 22px rgba(20,33,61,.1)}
+.card h2{font-size:20px;margin-bottom:8px}
+button.b{background:linear-gradient(135deg,#ffd24d,#f2a900);box-shadow:0 4px 12px rgba(242,169,0,.35);font-weight:700;transition:transform .15s}
+button.b:active,.opt:active,.chip:active{transform:scale(.97)}
+.opt{border-radius:14px;transition:.15s}.opt:hover:not(:disabled){border-color:var(--ac)}
+.dial{background:linear-gradient(160deg,#0f1b2d,#1b3d7a);color:#e8eef7;border-radius:16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.dial .k{text-shadow:0 0 18px rgba(255,201,51,.6)}
+canvas#c3{border-radius:16px;box-shadow:0 8px 24px rgba(11,40,80,.3)}
+input[type=range]{height:30px}.tip{border-radius:12px}
+.bar{height:12px}.bar i{background:linear-gradient(90deg,var(--ac),var(--ac2))}
+footer{text-align:center;color:var(--mut);font-size:13px;margin-top:22px}
+details{font-size:16px}details p{margin:6px 0}nav button,button.b,.opt{min-height:44px}input[type=number]{max-width:100%}
+svg#an{width:100%;height:auto;display:block;background:var(--bg);border-radius:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.chip{font:inherit;border:2px solid var(--ln);background:var(--bg);color:var(--ink);border-radius:20px;padding:8px 14px;min-height:44px;cursor:pointer}.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.ex{background:var(--bg);border-radius:10px;padding:10px;margin-top:8px;min-height:3.4em}
+@media(min-width:820px){main{max-width:1040px;padding:16px 24px 56px}body{font-size:17px}h1{font-size:26px}#el,#tl{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;align-items:start}#g .card:not(.wide){max-width:760px;margin-left:auto;margin-right:auto}}
+@media(max-width:360px){body{font-size:15px}h1{font-size:17px}.hud{font-size:12px}.dial .k{font-size:28px}}
+@media(max-height:480px) and (orientation:landscape){canvas#c3{height:70vh}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><main>
+<div class="top"><h1>📻 นักสื่อสารวิทยุ</h1><div class="hud"><span id="xp">⭐ 0</span><span id="hp">❤️❤️❤️</span></div></div>
+<nav id="nv" aria-label="เมนูหน้า"></nav>
+
+<section id="g">
+ <div class="card wide" id="p3d"><h2>🛰️ ห้องทดลองคลื่น 3 มิติ</h2><div class="tip">🧒 <b>เข้าใจง่าย ๆ:</b> คลื่นวิทยุเหมือนลูกคลื่นบนเชือกที่ถูกสะบัด แต่วิ่งในอากาศเร็วเท่าแสง ลองเลื่อนแถบความถี่ด้านล่าง ถ้าคลื่นถี่ขึ้น ลูกคลื่นจะแคบลง (ความยาวคลื่นสั้น) ถ้าถี่น้อยลง ลูกคลื่นจะกว้างขึ้น</div><div class="mut">ลากภาพเพื่อหมุน · เหลือง = สนามไฟฟ้า · เขียวน้ำเงิน = สนามแม่เหล็ก</div>
+  <canvas id="c3" aria-label="คลื่นแม่เหล็กไฟฟ้า 3 มิติ"></canvas>
+  <label>ความถี่ f = <span id="lfv"></span> MHz</label><input type="range" id="lf" min="1" max="300" step="any" value="98" aria-label="ความถี่">
+  <div class="dial" style="text-align:left" id="fm"></div>
+  <label>กลับด้าน: ใส่ความยาวคลื่น λ (เมตร)</label><input type="number" id="li" step="any" min="0.01" placeholder="เช่น 3"><div class="fb ok" id="lo"></div>
+  <div class="mut">สังเกต: ความเร็วคลื่นคงที่ แต่เมื่อ f สูงขึ้น คลื่นถี่ขึ้นและ λ สั้นลง</div></div>
+ <div class="card" id="pan"><h2>🔍 ส่วนต่าง ๆ ของคลื่น</h2><div class="tip">🌊 <b>เข้าใจง่าย ๆ:</b> ภาพนี้คือคลื่นที่ตัดมามองจากด้านข้าง เหมือนลูกคลื่นในสระน้ำ ส่วนที่สูงคือ “สัน” ส่วนที่ต่ำคือ “ท้อง” ลองแตะแต่ละปุ่มแล้วดูว่าส่วนไหนสว่างขึ้น</div><div class="mut">แตะชื่อส่วนเพื่อดูตำแหน่งและคำอธิบาย</div>
+  <svg id="an" viewBox="0 0 320 215" role="img" aria-label="แผนภาพส่วนประกอบของคลื่น"></svg>
+  <div class="chips" id="pb"></div>
+  <label>แอมพลิจูด A = <span id="amv"></span> หน่วย</label><input type="range" id="am" min="0.5" max="2.5" step="0.1" value="1.7" aria-label="แอมพลิจูด">
+  <div class="ex" id="ax">แตะชื่อส่วนของคลื่นด้านบน</div></div>
+ <div class="card" id="pkn"><h2>📖 ความรู้ที่ต้องรู้ก่อนเล่น</h2><div class="mut">อ่านทีละหัวข้อ แล้วไปเล่นด่านต่อได้เลย</div>
+  
+  <details open><summary>1. คลื่นวิทยุคืออะไร</summary><p>คือพลังงานที่เดินทางเป็นลูกคลื่นผ่านอากาศ มองไม่เห็นด้วยตา ใช้ส่งเสียงและข้อมูลไปไกล ๆ</p><p>ไม่ต้องมีตัวกลาง จึงเดินทางผ่านอวกาศได้ และเร็วเท่าแสง คือ <b>3×10⁸ เมตรต่อวินาที</b> (เร็วจนวนรอบโลกได้ประมาณ 7 รอบใน 1 วินาที)</p></details>
+  <details open><summary>2. สูตร v = f × λ</summary><p><b>f</b> = ความถี่ คือจำนวนลูกคลื่นที่ผ่านต่อวินาที (Hz)<br><b>λ</b> = ความยาวคลื่น คือความกว้างของลูกคลื่น 1 ลูก (เมตร)<br><b>v</b> = ความเร็วคลื่น = 3×10⁸ m/s</p><p>ใช้บ่อย: <code>λ = c ÷ f</code> เช่น 100 MHz → λ = 3×10⁸ ÷ 100×10⁶ = <b>3 m</b></p><p>จำง่าย ๆ: ลูกคลื่นถี่ขึ้น ลูกคลื่นแต่ละลูกก็แคบลง</p></details>
+  <details open><summary>3. AM กับ FM ต่างกันอย่างไร</summary><p>ทั้งสองคือวิธี “ฝากเสียง” ไปกับคลื่นวิทยุ</p><p><b>AM</b> ฝากเสียงโดยทำให้คลื่น <b>สูงต่ำ</b> ตามเสียง (ปรับแอมพลิจูด) ย่าน 530–1600 kHz ส่งได้ไกล แต่เสียงมีสัญญาณรบกวนง่าย</p><p><b>FM</b> ฝากเสียงโดยทำให้คลื่น <b>ถี่ห่าง</b> ตามเสียง (ปรับความถี่) ย่าน 88–108 MHz เสียงชัด แต่ส่งได้ใกล้กว่า</p></details>
+  <details open><summary>4. คลื่นเดินทางอย่างไร</summary><p>🌍 <b>คลื่นดิน</b> วิ่งเลียบผิวโลก<br>🪞 <b>คลื่นฟ้า</b> พุ่งขึ้นไปสะท้อนชั้นไอโอโนสเฟียร์ (เหมือนกระจกบนฟ้า) แล้วกลับลงมา ทำให้ AM ส่งได้ไกล<br>📡 <b>คลื่นอวกาศ</b> วิ่งเป็นเส้นตรงทะลุฟ้า ใช้กับ FM และดาวเทียม</p></details>
+ </div>
+ <div class="card" id="pm1"><h2>🎮 ด่าน 1: จูนสถานี</h2><div class="tip"><b>วิธีเล่น:</b> อ่านโจทย์ → เลื่อนปุ่มหมุนไปยังค่าที่ต้องการ → กด “ล็อกสัญญาณ”<br><b>สูตรช่วย:</b> λ = 300 ÷ f (f หน่วย MHz, λ หน่วยเมตร) เช่น ต้องการ λ = 3 m ต้องใช้ f = 300 ÷ 3 = 100 MHz</div><div class="mut" id="tq"></div>
+  <div class="dial"><div class="k" id="fv">98 MHz</div><div id="lv"></div></div>
+  <input type="range" id="sl" min="88" max="108" step="1" value="98" aria-label="ความถี่">
+  <button class="b" id="lock">ล็อกสัญญาณ</button><div class="fb" id="tf"></div></div>
+ <div class="card" id="pm2"><h2>⚡ ด่าน 2: ตอบไวจริงหรือเท็จ</h2><div class="mut">ตอบผิดเสียหัวใจ 1 ดวง มี 3 ดวง</div>
+  <div class="bar"><i id="pg"></i></div><div id="tfq"></div></div>
+</section>
+
+<section id="e" hidden><div class="card"><h2>แบบฝึกหัด 8 ข้อ</h2><div class="mut">ตอบแล้วดูเฉลยได้ทันที ทำซ้ำได้ไม่จำกัด ใช้ c = 3×10⁸ m/s</div></div><div id="el"></div><div class="card" id="es"></div></section>
+
+<section id="t" hidden><div class="card"><h2>แบบทดสอบ 10 ข้อ</h2><div class="mut">เลือกคำตอบให้ครบ แล้วกดส่งเพื่อดูคะแนน จะเฉลยหลังส่งเท่านั้น</div></div><div id="tl"></div><div class="card"><button class="b" id="sub">ส่งคำตอบ</button><div id="tr"></div></div></section>
+<div class="pn"><button class="b" id="pv">◀ ย้อนกลับ</button><button class="b" id="nx">หน้าถัดไป ▶</button></div>
+<footer>📻 นักสื่อสารวิทยุ · สื่อการสอนเรื่องคลื่นวิทยุ</footer>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+var $=function(s){return document.querySelector(s)};
+var xp=0,hp=3;
+function hud(){$('#xp').textContent='⭐ '+xp;$('#hp').textContent=hp>0?'❤️'.repeat(hp):'💔'}
+var PG=[['p3d','🛰️ 3 มิติ'],['pan','🔍 ส่วนของคลื่น'],['pkn','📖 ความรู้'],['pm1','🎮 จูนสถานี'],['pm2','⚡ จริง/เท็จ'],['e','✏️ แบบฝึกหัด'],['t','📝 แบบทดสอบ']],pi=0;
+$('#nv').innerHTML=PG.map(function(p,i){return '<button data-i="'+i+'">'+p[1]+'</button>'}).join('');
+function go(i){pi=Math.max(0,Math.min(PG.length-1,i));PG.forEach(function(p,k){$('#'+p[0]).hidden=k!==pi});
+ var bs=document.querySelectorAll('#nv button');bs.forEach(function(b,k){b.classList.toggle('on',k===pi)});
+ $('#pv').disabled=pi===0;$('#nx').disabled=pi===PG.length-1;
+ bs[pi].scrollIntoView({inline:'center',block:'nearest'});window.scrollTo(0,0);dispatchEvent(new Event('resize'))}
+$('#nv').onclick=function(e){var b=e.target.closest('button');if(b)go(+b.dataset.i)};
+$('#pv').onclick=function(){go(pi-1)};$('#nx').onclick=function(){go(pi+1)};
+go(0);
+// wave
+var F=98,AMP=1.7;
+function fmt(x){return x>=100?x.toFixed(1):x>=1?x.toFixed(2):x.toFixed(3)}
+function setF(v){F=v;$('#lf').value=v;$('#lfv').textContent=fmt(v);var l=300/v;
+ $('#fm').innerHTML='λ = c ÷ f = 3×10⁸ ÷ ('+fmt(v)+'×10⁶) = <b>'+fmt(l)+' m</b><br>T = 1 ÷ f = <b>'+fmt(1000/v)+' ns</b><br>v = f × λ = '+fmt(v)+'×10⁶ × '+fmt(l)+' = <b>3×10⁸ m/s</b>'}
+$('#lf').oninput=function(){setF(Math.round(+this.value*10)/10)};
+$('#li').oninput=function(){var l=parseFloat(this.value),o=$('#lo');if(!(l>0)){o.textContent='';return}var f=300/l;o.textContent='f = c ÷ λ = 3×10⁸ ÷ '+l+' = '+fmt(f)+' MHz';if(f>=1&&f<=300)setF(Math.round(f*100)/100)};
+(function(){var cv=$('#c3');if(!window.THREE){cv.style.display='none';return}
+ var R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true}),S=new THREE.Scene(),Cm=new THREE.PerspectiveCamera(42,2,.1,100),G=new THREE.Group(),N=110;
+ S.add(G);Cm.position.set(0,3.5,17);Cm.lookAt(0,0,0);
+ function sz(){var w=cv.clientWidth||300,h=cv.clientHeight||260;R.setPixelRatio(Math.min(window.devicePixelRatio||1,2));R.setSize(w,h,false);Cm.aspect=w/h;Cm.position.z=17*Math.max(1,1.7/Cm.aspect);Cm.updateProjectionMatrix()}sz();addEventListener('resize',sz);
+ function mk(n){var g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(n*3),3));return g}
+ function lm(c){return new THREE.LineBasicMaterial({color:c})}
+ var gE=mk(N*2),gB=mk(N*2),tE=mk(N),tB=mk(N);
+ G.add(new THREE.LineSegments(gE,lm(0xf2a900)),new THREE.LineSegments(gB,lm(0x37c2b8)),new THREE.Line(tE,lm(0xffe08a)),new THREE.Line(tB,lm(0xa5f0ea)));
+ G.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-7,0,0),new THREE.Vector3(7.5,0,0)]),lm(0x8899aa)));
+ var an=new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,3.6),new THREE.MeshBasicMaterial({color:0xb7c4d6}));an.position.set(-7.2,0,0);G.add(an);
+ var tp=new THREE.Mesh(new THREE.SphereGeometry(.22,16,16),new THREE.MeshBasicMaterial({color:0xff6b4a}));tp.position.set(-7.2,1.9,0);G.add(tp);
+ var t=0,ry=-.55,dr=null;
+ cv.addEventListener('pointerdown',function(e){dr=e.clientX;cv.style.cursor='grabbing'});
+ addEventListener('pointerup',function(){dr=null;cv.style.cursor='grab'});
+ addEventListener('pointermove',function(e){if(dr!==null){ry+=(e.clientX-dr)*.012;dr=e.clientX}});
+ (function loop(){t+=.016;var lv=14/Math.max(.5,F/25),a=gE.attributes.position.array,b=gB.attributes.position.array,e=tE.attributes.position.array,m=tB.attributes.position.array;
+  for(var i=0;i<N;i++){var x=-7+14*i/(N-1),s=Math.sin(2*Math.PI*(x-2*t)/lv)*AMP,k=i*6;
+   a[k]=x;a[k+1]=0;a[k+2]=0;a[k+3]=x;a[k+4]=s;a[k+5]=0;
+   b[k]=x;b[k+1]=0;b[k+2]=0;b[k+3]=x;b[k+4]=0;b[k+5]=s;
+   e[i*3]=x;e[i*3+1]=s;e[i*3+2]=0;m[i*3]=x;m[i*3+1]=0;m[i*3+2]=s}
+  gE.attributes.position.needsUpdate=gB.attributes.position.needsUpdate=tE.attributes.position.needsUpdate=tB.attributes.position.needsUpdate=true;
+  tp.scale.setScalar(1+.25*Math.sin(t*8));G.rotation.y=ry+(dr===null?Math.sin(t*.4)*.12:0);
+  R.render(S,Cm);requestAnimationFrame(loop)})();
+})();
+var cur=null;
+var PT={crest:['สันคลื่น','จุดสูงสุดของคลื่น อยู่สูงกว่าแนวสมดุลมากที่สุด'],trough:['ท้องคลื่น','จุดต่ำสุดของคลื่น อยู่ต่ำกว่าแนวสมดุลมากที่สุด'],amp:['แอมพลิจูด (A)','ระยะจากแนวสมดุลถึงสันคลื่น ยิ่งมากสัญญาณยิ่งแรง คลื่น AM ส่งเสียงโดยเปลี่ยนค่านี้ ลองเลื่อนแถบด้านล่างและดูภาพ 3 มิติเปลี่ยนตาม'],lam:['ความยาวคลื่น (λ)','ระยะระหว่างสันคลื่นสองสันที่อยู่ติดกัน หน่วยเมตร คำนวณจาก λ = c ÷ f'],freq:['ความถี่ (f)','จำนวนรอบของคลื่นที่ผ่านจุดหนึ่งใน 1 วินาที หน่วยเฮิรตซ์ (Hz) คลื่น FM ส่งเสียงโดยเปลี่ยนค่านี้'],period:['คาบ (T)','เวลาที่คลื่นครบ 1 รอบ หน่วยวินาที T = 1 ÷ f เช่น f = 100 MHz จะได้ T = 10 ns'],dir:['ทิศการเคลื่อนที่','คลื่นวิทยุเป็นคลื่นตามขวาง สนามไฟฟ้า สนามแม่เหล็ก และทิศการเคลื่อนที่ตั้งฉากกันทั้งสามแกน']};
+function hl(){document.querySelectorAll('#an [data-p]').forEach(function(e){e.style.opacity=(!cur||e.dataset.p.split(' ').indexOf(cur)>=0)?1:.18})}
+function drawA(){var A=AMP*30,d='',y0=100;for(var x=20;x<=300;x+=4)d+=(x===20?'M':'L')+x+' '+(y0-A*Math.cos(2*Math.PI*(x-55)/140)).toFixed(1);
+ $('#amv').textContent=AMP.toFixed(1);
+ $('#an').innerHTML='<line data-p="amp" x1="20" x2="300" y1="100" y2="100" stroke="var(--mut)" stroke-dasharray="5 4"/><path data-p="freq period crest trough" d="'+d+'" fill="none" stroke="var(--ac)" stroke-width="3.5"/>'+
+ '<line data-p="amp" x1="55" x2="55" y1="100" y2="'+(100-A)+'" stroke="var(--bad)" stroke-width="3"/><text data-p="amp" x="42" y="'+(100-A/2+4)+'" fill="var(--bad)" font-size="14" font-weight="700">A</text>'+
+ '<circle data-p="crest" cx="55" cy="'+(100-A)+'" r="6" fill="var(--ac2)"/><text data-p="crest" x="55" y="'+(100-A+22)+'" text-anchor="middle" fill="var(--ink)" font-size="11">สันคลื่น</text>'+
+ '<circle data-p="trough" cx="125" cy="'+(100+A)+'" r="6" fill="var(--ac2)"/><text data-p="trough" x="125" y="'+(100+A-12)+'" text-anchor="middle" fill="var(--ink)" font-size="11">ท้องคลื่น</text>'+
+ '<line data-p="lam" x1="55" x2="195" y1="'+(100-A-12)+'" y2="'+(100-A-12)+'" stroke="var(--ok)" stroke-width="3"/><text data-p="lam" x="125" y="'+(100-A-18)+'" text-anchor="middle" fill="var(--ok)" font-size="14" font-weight="700">λ</text>'+
+ '<g data-p="dir"><line x1="110" x2="215" y1="203" y2="203" stroke="var(--ink)" stroke-width="2.5"/><polygon points="215,197 227,203 215,209" fill="var(--ink)"/><text x="60" y="207" fill="var(--ink)" font-size="11">ทิศ</text></g>';hl()}
+function dsc(){$('#ax').innerHTML=cur?'<b>'+PT[cur][0]+'</b><br>'+PT[cur][1]+(cur==='freq'||cur==='period'?'<br>ตอนนี้ f = '+fmt(F)+' MHz, T = '+fmt(1000/F)+' ns':''):'แตะชื่อส่วนของคลื่นด้านบน'}
+$('#pb').innerHTML=Object.keys(PT).map(function(k){return '<button class="chip" data-k="'+k+'">'+PT[k][0].split(' ')[0]+'</button>'}).join('');
+$('#pb').onclick=function(e){var b=e.target.closest('.chip');if(!b)return;cur=cur===b.dataset.k?null:b.dataset.k;document.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c.dataset.k===cur)});hl();dsc()};
+$('#am').oninput=function(){AMP=+this.value;drawA()};
+drawA();dsc();
+setF(98);
+// mission 1
+var T=[{f:95,q:'สถานีที่ 1: จูนไปที่ความถี่ 95 MHz'},{f:100,q:'สถานีที่ 2: จูนให้ได้ความยาวคลื่น 3.00 m'},{f:90,q:'สถานีที่ 3: จูนให้ได้ความยาวคลื่นประมาณ 3.33 m'}],ti=0;
+function lam(f){return 300/f}
+function upd(){var f=+$('#sl').value;$('#fv').textContent=f+' MHz';$('#lv').textContent='λ = 300 ÷ '+f+' = '+lam(f).toFixed(2)+' m'}
+function tshow(){if(ti>=T.length){$('#tq').textContent='ผ่านด่านจูนสถานีครบแล้ว 🎉';$('#lock').disabled=true;return}$('#tq').textContent=T[ti].q}
+$('#sl').oninput=function(){upd();setF(+$('#sl').value)};
+$('#lock').onclick=function(){var ok=+$('#sl').value===T[ti].f,fb=$('#tf');
+ if(ok){xp+=20;ti++;fb.className='fb ok';fb.textContent='ล็อกสัญญาณสำเร็จ +20 XP';tshow()}else{fb.className='fb bad';fb.textContent='ยังไม่ใช่ ลองดูค่า λ = c ÷ f อีกครั้ง'}hud()};
+upd();tshow();
+// mission 2
+var Q=[['คลื่นวิทยุเดินทางผ่านสุญญากาศได้',1,'คลื่นแม่เหล็กไฟฟ้าไม่ต้องใช้ตัวกลาง'],['ความถี่สูงขึ้น ความยาวคลื่นยาวขึ้น',0,'ในทางตรงกันข้าม f สูง λ จะสั้นลง'],['คลื่น AM ปรับแอมพลิจูดของคลื่นพาหะ',1,'AM = Amplitude Modulation'],['คลื่น FM ส่งไกลกว่า AM เพราะสะท้อนไอโอโนสเฟียร์',0,'AM ต่างหากที่สะท้อนได้ FM ส่งเป็นเส้นตรง'],['ความเร็วคลื่นวิทยุในสุญญากาศประมาณ 3×10⁸ m/s',1,'เท่ากับความเร็วแสง'],['คลื่นดินเดินทางไปตามผิวโลก',1,'ถูกต้อง'],['วิทยุ 1 MHz เท่ากับ 1000 Hz',0,'1 MHz = 1,000,000 Hz'],['ดาวเทียมสื่อสารใช้คลื่นอวกาศ',1,'คลื่นเส้นตรงทะลุไอโอโนสเฟียร์']],qi=0;
+function qshow(){var b=$('#tfq');$('#pg').style.width=(qi/Q.length*100)+'%';
+ if(hp<=0){b.innerHTML='<div class="fb bad">หัวใจหมดแล้ว 💔</div><button class="b" id="rt">เล่นใหม่</button>';$('#rt').onclick=function(){hp=3;qi=0;hud();qshow()};return}
+ if(qi>=Q.length){b.innerHTML='<div class="fb ok">ผ่านด่าน 2 แล้ว! 🏆</div><button class="b" id="rt">เล่นซ้ำ</button>';$('#rt').onclick=function(){qi=0;qshow()};return}
+ b.innerHTML='<p><b>'+Q[qi][0]+'</b></p><button class="opt" data-v="1">✅ จริง</button><button class="opt" data-v="0">❌ เท็จ</button><div class="fb" id="ff"></div>';
+ b.querySelectorAll('.opt').forEach(function(o){o.onclick=function(){var ok=+o.dataset.v===Q[qi][1];
+  b.querySelectorAll('.opt').forEach(function(x){x.disabled=true});o.classList.add(ok?'ok':'bad');
+  if(ok)xp+=10;else hp--;hud();var f=$('#ff');f.className='fb '+(ok?'ok':'bad');f.textContent=(ok?'ถูก +10 XP · ':'ผิด · ')+Q[qi][2];
+  var n=document.createElement('button');n.className='b';n.textContent='ข้อต่อไป';n.onclick=function(){qi++;qshow()};b.appendChild(n)}})}
+qshow();
+// exercises
+var E=[
+{q:'คลื่นวิทยุเป็นคลื่นชนิดใด',o:['คลื่นกล','คลื่นแม่เหล็กไฟฟ้า','คลื่นเสียง','คลื่นน้ำ'],a:1,e:'คลื่นวิทยุเป็นคลื่นแม่เหล็กไฟฟ้า ไม่ต้องใช้ตัวกลาง'},
+{q:'ความเร็วของคลื่นวิทยุในสุญญากาศเท่าใด',o:['340 m/s','3×10⁶ m/s','3×10⁸ m/s','3×10¹⁰ m/s'],a:2,e:'เท่ากับความเร็วแสง c = 3×10⁸ m/s'},
+{q:'เมื่อความถี่ของคลื่นวิทยุเพิ่มขึ้น ความยาวคลื่นจะเป็นอย่างไร',o:['ยาวขึ้น','สั้นลง','เท่าเดิม','ไม่แน่นอน'],a:1,e:'v = fλ เมื่อ v คงที่ f กับ λ แปรผกผันกัน'},
+{q:'สถานี FM ความถี่ 100 MHz มีความยาวคลื่นกี่เมตร',n:3,t:.01,u:'m',e:'λ = c/f = 3×10⁸ ÷ 100×10⁶ = 3 m'},
+{q:'คลื่นวิทยุความยาวคลื่น 600 m มีความถี่กี่ kHz',n:500,t:.5,u:'kHz',e:'f = 3×10⁸ ÷ 600 = 5×10⁵ Hz = 500 kHz'},
+{q:'คลื่นที่สะท้อนชั้นไอโอโนสเฟียร์แล้วกลับมายังโลกเรียกว่า',o:['คลื่นดิน','คลื่นฟ้า','คลื่นอวกาศ','คลื่นผิวน้ำ'],a:1,e:'คลื่นฟ้า (Sky wave) ทำให้ AM ส่งได้ไกลโดยเฉพาะตอนกลางคืน'},
+{q:'ข้อใดอธิบาย AM ได้ถูกต้อง',o:['ปรับความถี่ของคลื่นพาหะ','ปรับแอมพลิจูดของคลื่นพาหะ','ใช้ความถี่ 88–108 MHz','ส่งเป็นเส้นตรงเท่านั้น'],a:1,e:'AM = Amplitude Modulation'},
+{q:'คลื่นวิทยุความถี่ 1.5 MHz มีความยาวคลื่นกี่เมตร',n:200,t:.5,u:'m',e:'λ = 3×10⁸ ÷ 1.5×10⁶ = 200 m'}];
+var TS=[
+{q:'คลื่นชนิดใดในสเปกตรัมแม่เหล็กไฟฟ้ามีความถี่ต่ำสุด',o:['รังสีเอกซ์','แสงที่ตามองเห็น','คลื่นวิทยุ','รังสีแกมมา'],a:2},
+{q:'สมการใดถูกต้อง',o:['v = f/λ','v = fλ','v = λ/f','v = f+λ'],a:1},
+{q:'คลื่นความถี่ 50 MHz มีความยาวคลื่นกี่เมตร',o:['3 m','6 m','15 m','60 m'],a:1},
+{q:'คลื่นความยาว 1.5 m มีความถี่เท่าใด',o:['100 MHz','150 MHz','200 MHz','450 MHz'],a:2},
+{q:'ย่านความถี่ FM คือ',o:['530–1600 kHz','88–108 MHz','3–30 MHz','1–10 GHz'],a:1},
+{q:'ย่านความถี่ AM คือ',o:['88–108 MHz','530–1600 kHz','2–5 GHz','10–20 kHz'],a:1},
+{q:'คลื่นดินเดินทางอย่างไร',o:['สะท้อนไอโอโนสเฟียร์','เป็นเส้นตรงทะลุบรรยากาศ','ไปตามผิวโลก','ผ่านใต้ดินลึก'],a:2},
+{q:'เหตุใด AM จึงฟังได้ไกลข้ามจังหวัดในตอนกลางคืน',o:['กำลังส่งเพิ่มขึ้นเอง','สะท้อนชั้นไอโอโนสเฟียร์ได้ดี','ความถี่สูงมาก','ใช้สายส่งใต้ดิน'],a:1},
+{q:'เหตุใดคลื่น FM จึงส่งได้ในระยะจำกัด',o:['ความถี่ต่ำเกินไป','วิ่งเป็นเส้นตรงและทะลุไอโอโนสเฟียร์','ถูกดูดซับโดยน้ำเสมอ','ไม่ใช่คลื่นแม่เหล็กไฟฟ้า'],a:1},
+{q:'มอดูเลชันคืออะไร',o:['การขยายเสียงด้วยลำโพง','การนำสัญญาณเสียงไปกับคลื่นพาหะ','การวัดความเร็วคลื่น','การกรองคลื่นรบกวนออก'],a:1}];
+function opts(it,i,pre){return it.o.map(function(t,j){return '<button class="opt" data-i="'+i+'" data-j="'+j+'">'+'ก ข ค ง'.split(' ')[j]+'. '+t+'</button>'}).join('')}
+function rEx(){var h='';E.forEach(function(it,i){h+='<div class="card" id="e'+i+'"><b>'+(i+1)+'. '+it.q+'</b>';
+ h+=it.o?opts(it,i):'<div style="margin-top:8px"><input type="number" step="any" id="n'+i+'" aria-label="คำตอบ"> '+it.u+' <button class="b" data-c="'+i+'">ตรวจ</button></div>';
+ h+='<div class="fb" id="f'+i+'"></div></div>'});$('#el').innerHTML=h;exs={};sumE()}
+var exs={};
+function sumE(){var n=Object.keys(exs).length,s=0;for(var k in exs)if(exs[k])s++;$('#es').innerHTML='ทำแล้ว '+n+'/8 ข้อ · ถูก '+s+' ข้อ';}
+function fbE(i,ok){exs[i]=ok;var f=$('#f'+i);f.className='fb '+(ok?'ok':'bad');f.textContent=(ok?'✅ ถูกต้อง · ':'❌ ยังไม่ถูก · ')+E[i].e;sumE()}
+$('#el').onclick=function(ev){var b=ev.target.closest('button');if(!b)return;
+ if(b.dataset.c!==undefined){var i=+b.dataset.c,v=parseFloat($('#n'+i).value);if(isNaN(v))return;fbE(i,Math.abs(v-E[i].n)<=E[i].t)}
+ else if(b.dataset.j!==undefined){var i=+b.dataset.i,j=+b.dataset.j,ok=j===E[i].a;
+  document.querySelectorAll('#e'+i+' .opt').forEach(function(o){o.disabled=true;if(+o.dataset.j===E[i].a)o.classList.add('ok')});if(!ok)b.classList.add('bad');fbE(i,ok)}};
+rEx();
+// test
+var ans={},done=false;
+function rT(){var h='';TS.forEach(function(it,i){h+='<div class="card" id="t'+i+'"><b>'+(i+1)+'. '+it.q+'</b>'+opts(it,i)+'</div>'});$('#tl').innerHTML=h;ans={};done=false;$('#tr').innerHTML='';$('#sub').textContent='ส่งคำตอบ'}
+$('#tl').onclick=function(ev){var b=ev.target.closest('.opt');if(!b||done)return;var i=+b.dataset.i;ans[i]=+b.dataset.j;
+ document.querySelectorAll('#t'+i+' .opt').forEach(function(o){o.classList.toggle('sel',o===b)})};
+$('#sub').onclick=function(){if(done){rT();window.scrollTo(0,0);return}
+ var n=Object.keys(ans).length;if(n<TS.length){$('#tr').innerHTML='<div class="fb bad">ยังตอบไม่ครบ เหลืออีก '+(TS.length-n)+' ข้อ</div>';return}
+ var s=0;TS.forEach(function(it,i){var ok=ans[i]===it.a;if(ok)s++;
+  document.querySelectorAll('#t'+i+' .opt').forEach(function(o){var j=+o.dataset.j;o.disabled=true;if(j===it.a)o.classList.add('ok');else if(j===ans[i])o.classList.add('bad')})});
+ done=true;var g=s>=9?'ยอดเยี่ยม! 🏆':s>=7?'ดีมาก 👍':s>=5?'ผ่านเกณฑ์ ทบทวนอีกนิด':'ลองกลับไปเล่นเกมและทำแบบฝึกหัดอีกครั้ง';
+ $('#tr').innerHTML='<div class="big">'+s+' / '+TS.length+'</div><div>'+g+'</div><div class="mut">ข้อที่เป็นสีเขียวคือคำตอบที่ถูกต้อง</div>';$('#sub').textContent='ทำใหม่'};
+rT();
+</script></body></html>
