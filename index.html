@@ -105,6 +105,15 @@ body{font-size:17px}
 #el,#tl{grid-template-columns:repeat(auto-fill,minmax(420px,1fr))}
 }
 @media(min-width:1280px){body{font-size:18px}}
+.inf h3{font-size:18px;margin:18px 0 4px}
+@media(min-width:760px){
+#g #pm1,#g #pm2{max-width:none}
+#pm1 .dial .k{font-size:clamp(40px,6vw,72px)}#pm1 .dial div{font-size:18px}
+#pm1 input[type=range]{height:40px}
+#tfq{display:grid;grid-template-columns:1fr 1fr;gap:10px}#tfq>p,#tfq>.fb,#tfq>.b{grid-column:1/-1}
+#tfq .opt{font-size:1.1em;padding:18px;text-align:center}
+}
+@media(min-width:1200px){#pkn{columns:3}}
 body,.card,nav,.opt,.chip,.sw button{transition:background-color .35s,color .35s,border-color .35s}
 .pl{font-size:18px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.18);border-radius:999px;width:36px;height:36px;cursor:pointer;color:#fff}
 .sw{display:none;gap:8px;flex-wrap:wrap;margin:8px 0}.sw.open{display:flex;animation:pgin .3s}
@@ -149,7 +158,7 @@ svg#an{width:100%;height:auto;display:block;background:var(--bg);border-radius:1
 <div class="sw" id="sw" aria-label="เลือกพื้นหลัง"></div><nav id="nv" aria-label="เมนูหน้า"></nav>
 
 <section id="g">
- <div class="card wide" id="p3d"><h2>🛰️ ห้องทดลองคลื่น 3 มิติ</h2><div class="tip">🧒 <b>เข้าใจง่าย ๆ:</b> คลื่นวิทยุเหมือนลูกคลื่นบนเชือกที่ถูกสะบัด แต่วิ่งในอากาศเร็วเท่าแสง ลองเลื่อนแถบความถี่ด้านล่าง ถ้าคลื่นถี่ขึ้น ลูกคลื่นจะแคบลง (ความยาวคลื่นสั้น) ถ้าถี่น้อยลง ลูกคลื่นจะกว้างขึ้น</div><div class="mut">ลากภาพเพื่อหมุน · เหลือง = สนามไฟฟ้า · เขียวน้ำเงิน = สนามแม่เหล็ก</div>
+ <div class="card wide" id="p3d"><h2>🛰️ ห้องทดลองคลื่น 3 มิติและส่วนต่าง ๆ ของคลื่น</h2><div class="tip">🧒 <b>เข้าใจง่าย ๆ:</b> คลื่นวิทยุเหมือนลูกคลื่นบนเชือกที่ถูกสะบัด แต่วิ่งในอากาศเร็วเท่าแสง ลองเลื่อนแถบความถี่ด้านล่าง ถ้าคลื่นถี่ขึ้น ลูกคลื่นจะแคบลง (ความยาวคลื่นสั้น) ถ้าถี่น้อยลง ลูกคลื่นจะกว้างขึ้น</div><div class="mut">ลากภาพเพื่อหมุน · เหลือง = สนามไฟฟ้า · เขียวน้ำเงิน = สนามแม่เหล็ก</div>
   <div class="w3"><div class="cv"><canvas id="c3" aria-label="คลื่นแม่เหล็กไฟฟ้า 3 มิติ"></canvas></div><div class="inf"><div class="tip" id="bd"></div>
   <label>ความถี่ f = <span id="lfv"></span> MHz</label><input type="range" id="lf" min="1" max="300" step="any" value="98" aria-label="ความถี่">
   <div class="dial" style="text-align:left" id="fm"></div>
@@ -189,7 +198,9 @@ function pop(el,n){if(!el||matchMedia('(prefers-reduced-motion:reduce)').matches
  for(var i=0;i<n;i++){var s=document.createElement('span');s.className='cf';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';
   var a=Math.random()*6.28,d=50+Math.random()*70;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*360-180)+'deg');document.body.appendChild(s);setTimeout(function(x){x.remove()},950,s)}}
 function hud(){}
-var PG=[['p3d','🛰️ 3 มิติ'],['pan','🔍 ส่วนของคลื่น'],['pkn','📖 ความรู้'],['pm1','🎮 จูนสถานี'],['pm2','⚡ จริง/เท็จ'],['e','✏️ แบบฝึกหัด'],['t','📝 แบบทดสอบ']],pi=0;
+(function(){var p=$('#pan'),inf=document.querySelector('#p3d .inf'),h=document.createElement('h3');h.textContent='🔍 ส่วนต่าง ๆ ของคลื่น';inf.appendChild(h);
+ Array.prototype.slice.call(p.children).slice(1).forEach(function(c){inf.appendChild(c)});p.remove()})();
+var PG=[['p3d','🛰️ คลื่น 3 มิติ'],['pkn','📖 ความรู้'],['pm1','🎮 จูนสถานี'],['pm2','⚡ จริง/เท็จ'],['e','✏️ แบบฝึกหัด'],['t','📝 แบบทดสอบ']],pi=0;
 $('#nv').innerHTML=PG.map(function(p,i){return '<button data-i="'+i+'">'+p[1]+'</button>'}).join('');
 function go(i){pi=Math.max(0,Math.min(PG.length-1,i));PG.forEach(function(p,k){$('#'+p[0]).hidden=k!==pi});
  var bs=document.querySelectorAll('#nv button');bs.forEach(function(b,k){b.classList.toggle('on',k===pi)});
