@@ -2,7 +2,7 @@
 <html lang="th"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>นักสื่อสารวิทยุ: เกมคลื่นวิทยุ</title>
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;700&family=Mali:wght@500;700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#eaf1f5;--card:#fff;--ink:#14213d;--mut:#5b6b82;--ac:#0b7a75;--ac2:#f2a900;--ok:#1d8f4e;--bad:#c8402f;--ln:#cfdae4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b2d;--card:#182740;--ink:#e8eef7;--mut:#9fb0c7;--ac:#37c2b8;--ac2:#ffc933;--ok:#4cd08a;--bad:#ff7b68;--ln:#2c3f5c}}
@@ -58,6 +58,68 @@ canvas#c3{border-radius:16px;box-shadow:0 8px 24px rgba(11,40,80,.3)}
 input[type=range]{height:30px}.tip{border-radius:12px}
 .bar{height:12px}.bar i{background:linear-gradient(90deg,var(--ac),var(--ac2))}
 footer{text-align:center;color:var(--mut);font-size:13px;margin-top:22px}
+html{scroll-behavior:smooth}
+body{--hd:linear-gradient(135deg,#0b7a75,#1b3d7a 70%,#3b2a7a)}
+body[data-bg=sea]{--ac:#0a8fb0;--ac2:#ffb84d;--hd:linear-gradient(135deg,#0a8fb0,#1b4f9c)}
+body[data-bg=sunset]{--ac:#e2603a;--ac2:#ffb347;--hd:linear-gradient(135deg,#e2603a,#a23b72)}
+body[data-bg=forest]{--ac:#2f8f4e;--ac2:#e9c46a;--hd:linear-gradient(135deg,#2f8f4e,#1f5f4a)}
+body[data-bg=candy]{--ac:#d6479b;--ac2:#ffa6d2;--hd:linear-gradient(135deg,#d6479b,#8b5cf6)}
+body[data-bg=space]{--bg:#0b1020;--card:#161d38;--ink:#e8eef7;--mut:#a3b0cc;--ln:#2a3560;--ac:#7c9cff;--ac2:#ffd166;--hd:linear-gradient(135deg,#2b1b6b,#0b1020)}
+.top{background:var(--hd)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0f1b2d;--card:#182740;--ink:#e8eef7;--mut:#9fb0c7;--ac:#37c2b8;--ac2:#ffc933;--ok:#4cd08a;--bad:#ff7b68;--ln:#2c3f5c}
+:root[data-theme="light"]{color-scheme:light}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:rgba(5,10,25,0);transition:background .4s}
+:root[data-theme="dark"] body::after{background:rgba(5,10,25,.5)}
+@keyframes dx{to{background-position:var(--tw,0px) var(--th,0px)}}
+@keyframes tw{from{opacity:.5}to{opacity:1}}
+@keyframes sun{to{transform:scale(1.1);opacity:.75}}
+@keyframes sway{to{transform:translateX(50px)}}
+body[data-bg=sky]{background:linear-gradient(#8fd3ff,#d9f1ff 55%,#f4fbff) fixed}
+body[data-bg=sky]::before{background:radial-gradient(70px 26px at 80px 90px,#fffc,transparent),radial-gradient(110px 36px at 90px 92px,#fffa,transparent),radial-gradient(90px 30px at 330px 200px,#fffc,transparent),radial-gradient(130px 40px at 340px 202px,#fff9,transparent),radial-gradient(60px 22px at 220px 330px,#fffb,transparent);background-size:480px 420px;--tw:480px;animation:dx 70s linear infinite}
+body[data-bg=sea]{background:linear-gradient(#bdeeff,#4cc3e0 45%,#0a6f93 80%,#064a66) fixed}
+body[data-bg=sea]::before{background:radial-gradient(circle at 50% 0,transparent 22px,#ffffff44 23px 25px,transparent 26px);background-size:70px 36px;--tw:70px;animation:dx 9s linear infinite}
+body[data-bg=sunset]{background:linear-gradient(#2b1b5a,#a23b72 35%,#e2603a 65%,#ffb347) fixed}
+body[data-bg=sunset]::before{background:radial-gradient(circle at 50% 72%,#fff3b8 0 46px,#ffd27a88 47px 130px,transparent 270px);animation:sun 6s ease-in-out infinite alternate}
+body[data-bg=forest]{background:linear-gradient(#e7f7cf,#9ad49c 50%,#2f8f4e) fixed}
+body[data-bg=forest]::before{inset:-10% -10% -10% -20%;background:repeating-linear-gradient(105deg,#ffffcc44 0 36px,transparent 36px 130px);animation:sway 8s ease-in-out infinite alternate}
+body[data-bg=space]{background:radial-gradient(ellipse at 30% 20%,#2a1f6b,#0a0b24 60%,#03040b) fixed}
+body[data-bg=space]::before{background:radial-gradient(1.5px 1.5px at 20px 30px,#fff,transparent),radial-gradient(1px 1px at 90px 140px,#fffc,transparent),radial-gradient(2px 2px at 160px 80px,#ffe9a8,transparent),radial-gradient(1px 1px at 230px 220px,#fff,transparent),radial-gradient(1.5px 1.5px at 60px 250px,#cfe0ff,transparent),radial-gradient(1px 1px at 280px 40px,#fff,transparent);background-size:300px 300px;--th:300px;animation:dx 90s linear infinite,tw 3s ease-in-out infinite alternate}
+body[data-bg=candy]{background:linear-gradient(135deg,#ffd6ea,#e9d4ff 55%,#c7ecff) fixed}
+body[data-bg=candy]::before{background:radial-gradient(circle at 14px 14px,#fffb 7px,transparent 8px),radial-gradient(circle at 42px 42px,#ff9ecb88 5px,transparent 6px);background-size:56px 56px;--tw:56px;--th:56px;animation:dx 12s linear infinite}
+.card{background:color-mix(in srgb,var(--card) 90%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+footer{background:color-mix(in srgb,var(--card) 85%,transparent);border-radius:999px;padding:6px 14px;display:table;margin:22px auto 0}
+body,.card,nav,.opt,.chip,.sw button{transition:background-color .35s,color .35s,border-color .35s}
+.pl{font-size:18px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.18);border-radius:999px;width:36px;height:36px;cursor:pointer;color:#fff}
+.sw{display:none;gap:8px;flex-wrap:wrap;margin:8px 0}.sw.open{display:flex;animation:pgin .3s}
+.sw button{font:inherit;font-family:Mali,Sarabun,sans-serif;border:2px solid var(--ln);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;min-height:40px;cursor:pointer}
+.sw button.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 18%,var(--card))}
+body{font-family:Mali,Sarabun,Tahoma,sans-serif}
+h1,h2,h3,.k,nav button,button.b,.chip{font-family:Mali,Kanit,sans-serif}
+main{position:relative;z-index:1}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.bg i{position:absolute;font-style:normal;font-size:30px;opacity:.2;animation:flt 12s ease-in-out infinite}
+.bg i:nth-child(1){left:6%;top:18%}.bg i:nth-child(2){left:86%;top:30%;animation-delay:-3s}.bg i:nth-child(3){left:12%;top:70%;animation-delay:-6s}.bg i:nth-child(4){left:80%;top:78%;animation-delay:-9s}.bg i:nth-child(5){left:48%;top:92%;animation-delay:-4s}
+@keyframes flt{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-32px) rotate(8deg)}}
+.mas{display:inline-block;transform-origin:70% 90%;animation:wig 2.4s ease-in-out infinite}
+@keyframes wig{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg) scale(1.12)}}
+@keyframes pgin{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+#g>.card:not([hidden]),#e:not([hidden]),#t:not([hidden]){animation:pgin .4s cubic-bezier(.2,.9,.3,1.2)}
+.card{transition:transform .25s,box-shadow .25s}.card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(20,33,61,.14)}
+button.b:hover{transform:translateY(-2px)}nav button:hover,.chip:hover{transform:translateY(-2px)}
+.chip,.opt,nav button,button.b{transition:transform .18s cubic-bezier(.3,1.6,.5,1),background .2s,border-color .2s,box-shadow .2s}
+@keyframes jump{0%{transform:scale(1)}40%{transform:scale(1.04) translateY(-3px)}100%{transform:scale(1)}}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.opt.ok{animation:jump .45s}.opt.bad{animation:shake .4s}
+.hud span{display:inline-block}.bump{animation:bmp .45s}@keyframes bmp{50%{transform:scale(1.35)}}
+.cf{position:fixed;pointer-events:none;z-index:99;font-size:20px;animation:cf .9s ease-out forwards}
+@keyframes cf{from{opacity:1;transform:translate(0,0) scale(.6)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.3) rotate(var(--r))}}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent}
+input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:8px;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;border:4px solid var(--ac2);margin-top:-9px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-track{height:10px;border-radius:8px;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:4px solid var(--ac2)}
+@media(prefers-reduced-motion:reduce){body::before{animation:none!important}*{animation:none!important;transition:none!important}.bg{display:none}html{scroll-behavior:auto}}
 details{font-size:16px}details p{margin:6px 0}nav button,button.b,.opt{min-height:44px}input[type=number]{max-width:100%}
 svg#an{width:100%;height:auto;display:block;background:var(--bg);border-radius:12px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.chip{font:inherit;border:2px solid var(--ln);background:var(--bg);color:var(--ink);border-radius:20px;padding:8px 14px;min-height:44px;cursor:pointer}.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
@@ -66,9 +128,9 @@ svg#an{width:100%;height:auto;display:block;background:var(--bg);border-radius:1
 @media(max-width:360px){body{font-size:15px}h1{font-size:17px}.hud{font-size:12px}.dial .k{font-size:28px}}
 @media(max-height:480px) and (orientation:landscape){canvas#c3{height:70vh}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
-</style></head><body><main>
-<div class="top"><h1>📻 นักสื่อสารวิทยุ</h1><div class="hud"><span id="xp">⭐ 0</span><span id="hp">❤️❤️❤️</span></div></div>
-<nav id="nv" aria-label="เมนูหน้า"></nav>
+</style></head><body><div class="bg" aria-hidden="true"><i>📡</i><i>✨</i><i>☁️</i><i>📻</i><i>🌟</i></div><main>
+<div class="top"><h1><span class="mas">📻</span> นักสื่อสารวิทยุ</h1><div class="hud"><button class="pl" id="md" aria-label="สลับโหมดสว่าง/มืด">🌙</button><button class="pl" id="pal" aria-label="เปลี่ยนพื้นหลัง">🎨</button></div></div>
+<div class="sw" id="sw" aria-label="เลือกพื้นหลัง"></div><nav id="nv" aria-label="เมนูหน้า"></nav>
 
 <section id="g">
  <div class="card wide" id="p3d"><h2>🛰️ ห้องทดลองคลื่น 3 มิติ</h2><div class="tip">🧒 <b>เข้าใจง่าย ๆ:</b> คลื่นวิทยุเหมือนลูกคลื่นบนเชือกที่ถูกสะบัด แต่วิ่งในอากาศเร็วเท่าแสง ลองเลื่อนแถบความถี่ด้านล่าง ถ้าคลื่นถี่ขึ้น ลูกคลื่นจะแคบลง (ความยาวคลื่นสั้น) ถ้าถี่น้อยลง ลูกคลื่นจะกว้างขึ้น</div><div class="mut">ลากภาพเพื่อหมุน · เหลือง = สนามไฟฟ้า · เขียวน้ำเงิน = สนามแม่เหล็ก</div>
@@ -93,13 +155,13 @@ svg#an{width:100%;height:auto;display:block;background:var(--bg);border-radius:1
   <div class="dial"><div class="k" id="fv">98 MHz</div><div id="lv"></div></div>
   <input type="range" id="sl" min="88" max="108" step="1" value="98" aria-label="ความถี่">
   <button class="b" id="lock">ล็อกสัญญาณ</button><div class="fb" id="tf"></div></div>
- <div class="card" id="pm2"><h2>⚡ ด่าน 2: ตอบไวจริงหรือเท็จ</h2><div class="mut">ตอบผิดเสียหัวใจ 1 ดวง มี 3 ดวง</div>
+ <div class="card" id="pm2"><h2>⚡ ด่าน 2: ตอบไวจริงหรือเท็จ</h2><div class="mut">ตอบทีละข้อ ดูเฉลยทันที เล่นซ้ำได้ไม่จำกัด</div>
   <div class="bar"><i id="pg"></i></div><div id="tfq"></div></div>
 </section>
 
-<section id="e" hidden><div class="card"><h2>แบบฝึกหัด 8 ข้อ</h2><div class="mut">ตอบแล้วดูเฉลยได้ทันที ทำซ้ำได้ไม่จำกัด ใช้ c = 3×10⁸ m/s</div></div><div id="el"></div><div class="card" id="es"></div></section>
+<section id="e" hidden><div class="card"><h2>แบบฝึกหัดสุ่ม</h2><div class="mut">ตอบแล้วดูเฉลยได้ทันที กดสุ่มชุดใหม่ได้ไม่อั้น โจทย์คำนวณเปลี่ยนตัวเลขทุกครั้ง ใช้ c = 3×10⁸ m/s (ทริค: λ = 300 ÷ f เมื่อ f หน่วย MHz)</div><button class="b" id="re">🎲 สุ่มชุดใหม่</button></div><div id="el"></div><div class="card" id="es"></div></section>
 
-<section id="t" hidden><div class="card"><h2>แบบทดสอบ 10 ข้อ</h2><div class="mut">เลือกคำตอบให้ครบ แล้วกดส่งเพื่อดูคะแนน จะเฉลยหลังส่งเท่านั้น</div></div><div id="tl"></div><div class="card"><button class="b" id="sub">ส่งคำตอบ</button><div id="tr"></div></div></section>
+<section id="t" hidden><div class="card"><h2>แบบทดสอบ 10 ข้อ</h2><div class="mut">เลือกคำตอบให้ครบ แล้วกดส่งเพื่อดูคะแนน จะเฉลยหลังส่งเท่านั้น สุ่มจากคลัง 30 ข้อ ทำใหม่ทุกครั้งได้ชุดใหม่ และตัวเลือกสลับตำแหน่ง</div></div><div id="tl"></div><div class="card"><button class="b" id="sub">ส่งคำตอบ</button><div id="tr"></div></div></section>
 <div class="pn"><button class="b" id="pv">◀ ย้อนกลับ</button><button class="b" id="nx">หน้าถัดไป ▶</button></div>
 <footer>📻 นักสื่อสารวิทยุ · สื่อการสอนเรื่องคลื่นวิทยุ</footer>
 </main>
@@ -107,7 +169,10 @@ svg#an{width:100%;height:auto;display:block;background:var(--bg);border-radius:1
 <script>
 var $=function(s){return document.querySelector(s)};
 var xp=0,hp=3;
-function hud(){$('#xp').textContent='⭐ '+xp;$('#hp').textContent=hp>0?'❤️'.repeat(hp):'💔'}
+function pop(el,n){if(!el||matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=el.getBoundingClientRect(),E=['⭐','✨','💖','🎉','🌟'];n=n||8;
+ for(var i=0;i<n;i++){var s=document.createElement('span');s.className='cf';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';
+  var a=Math.random()*6.28,d=50+Math.random()*70;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*360-180)+'deg');document.body.appendChild(s);setTimeout(function(x){x.remove()},950,s)}}
+function hud(){}
 var PG=[['p3d','🛰️ 3 มิติ'],['pan','🔍 ส่วนของคลื่น'],['pkn','📖 ความรู้'],['pm1','🎮 จูนสถานี'],['pm2','⚡ จริง/เท็จ'],['e','✏️ แบบฝึกหัด'],['t','📝 แบบทดสอบ']],pi=0;
 $('#nv').innerHTML=PG.map(function(p,i){return '<button data-i="'+i+'">'+p[1]+'</button>'}).join('');
 function go(i){pi=Math.max(0,Math.min(PG.length-1,i));PG.forEach(function(p,k){$('#'+p[0]).hidden=k!==pi});
@@ -172,19 +237,22 @@ function upd(){var f=+$('#sl').value;$('#fv').textContent=f+' MHz';$('#lv').text
 function tshow(){if(ti>=T.length){$('#tq').textContent='ผ่านด่านจูนสถานีครบแล้ว 🎉';$('#lock').disabled=true;return}$('#tq').textContent=T[ti].q}
 $('#sl').oninput=function(){upd();setF(+$('#sl').value)};
 $('#lock').onclick=function(){var ok=+$('#sl').value===T[ti].f,fb=$('#tf');
- if(ok){xp+=20;ti++;fb.className='fb ok';fb.textContent='ล็อกสัญญาณสำเร็จ +20 XP';tshow()}else{fb.className='fb bad';fb.textContent='ยังไม่ใช่ ลองดูค่า λ = c ÷ f อีกครั้ง'}hud()};
+ if(ok){ti++;pop($('#lock'),10);fb.className='fb ok';fb.textContent='ล็อกสัญญาณสำเร็จ 🎉';tshow()}else{fb.className='fb bad';fb.textContent='ยังไม่ใช่ ลองดูค่า λ = c ÷ f อีกครั้ง'}hud()};
 upd();tshow();
 // mission 2
 var Q=[['คลื่นวิทยุเดินทางผ่านสุญญากาศได้',1,'คลื่นแม่เหล็กไฟฟ้าไม่ต้องใช้ตัวกลาง'],['ความถี่สูงขึ้น ความยาวคลื่นยาวขึ้น',0,'ในทางตรงกันข้าม f สูง λ จะสั้นลง'],['คลื่น AM ปรับแอมพลิจูดของคลื่นพาหะ',1,'AM = Amplitude Modulation'],['คลื่น FM ส่งไกลกว่า AM เพราะสะท้อนไอโอโนสเฟียร์',0,'AM ต่างหากที่สะท้อนได้ FM ส่งเป็นเส้นตรง'],['ความเร็วคลื่นวิทยุในสุญญากาศประมาณ 3×10⁸ m/s',1,'เท่ากับความเร็วแสง'],['คลื่นดินเดินทางไปตามผิวโลก',1,'ถูกต้อง'],['วิทยุ 1 MHz เท่ากับ 1000 Hz',0,'1 MHz = 1,000,000 Hz'],['ดาวเทียมสื่อสารใช้คลื่นอวกาศ',1,'คลื่นเส้นตรงทะลุไอโอโนสเฟียร์']],qi=0;
 function qshow(){var b=$('#tfq');$('#pg').style.width=(qi/Q.length*100)+'%';
- if(hp<=0){b.innerHTML='<div class="fb bad">หัวใจหมดแล้ว 💔</div><button class="b" id="rt">เล่นใหม่</button>';$('#rt').onclick=function(){hp=3;qi=0;hud();qshow()};return}
- if(qi>=Q.length){b.innerHTML='<div class="fb ok">ผ่านด่าน 2 แล้ว! 🏆</div><button class="b" id="rt">เล่นซ้ำ</button>';$('#rt').onclick=function(){qi=0;qshow()};return}
+ 
+ if(qi>=Q.length){b.innerHTML='<div class="fb ok">ผ่านด่าน 2 แล้ว! 🏆</div><button class="b" id="rt">เล่นซ้ำ</button>';$('#rt').onclick=function(){qi=0;newQ();qshow()};return}
  b.innerHTML='<p><b>'+Q[qi][0]+'</b></p><button class="opt" data-v="1">✅ จริง</button><button class="opt" data-v="0">❌ เท็จ</button><div class="fb" id="ff"></div>';
  b.querySelectorAll('.opt').forEach(function(o){o.onclick=function(){var ok=+o.dataset.v===Q[qi][1];
   b.querySelectorAll('.opt').forEach(function(x){x.disabled=true});o.classList.add(ok?'ok':'bad');
-  if(ok)xp+=10;else hp--;hud();var f=$('#ff');f.className='fb '+(ok?'ok':'bad');f.textContent=(ok?'ถูก +10 XP · ':'ผิด · ')+Q[qi][2];
+  if(ok)pop(o);var f=$('#ff');f.className='fb '+(ok?'ok':'bad');f.textContent=(ok?'ถูก ✅ · ':'ผิด · ')+Q[qi][2];
   var n=document.createElement('button');n.className='b';n.textContent='ข้อต่อไป';n.onclick=function(){qi++;qshow()};b.appendChild(n)}})}
-qshow();
+var QB=Q.concat([['คลื่นวิทยุมีความถี่สูงกว่าแสงที่ตามองเห็น',0,'คลื่นวิทยุความถี่ต่ำกว่าแสงมาก'],['คลื่นวิทยุทุกความถี่เดินทางในสุญญากาศด้วยความเร็วเท่ากัน',1,'ทั้งหมดคือ c = 3×10⁸ m/s'],['คาบ T คือ 1 ÷ f',1,'T = 1/f'],['คลื่น 100 MHz มีความยาวคลื่น 3 เมตร',1,'λ = 300 ÷ 100 = 3 m'],['คลื่นเสียงเป็นคลื่นแม่เหล็กไฟฟ้า',0,'เสียงเป็นคลื่นกล ต้องอาศัยตัวกลาง'],['1 kHz เท่ากับ 1,000 Hz',1,'k = 10³'],['ความยาวคลื่นวัดจากสันคลื่นถึงสันคลื่นที่อยู่ติดกัน',1,'ถูกต้อง'],['เพิ่มแอมพลิจูด ความถี่จะเพิ่มตาม',0,'แอมพลิจูดบอกความแรง ไม่เกี่ยวกับความถี่'],['FM ย่อมาจาก Frequency Modulation',1,'การมอดูเลตความถี่'],['คลื่น AM สะท้อนชั้นไอโอโนสเฟียร์ได้',1,'จึงเป็นคลื่นฟ้าได้'],['คลื่นวิทยุเป็นคลื่นตามยาว',0,'เป็นคลื่นตามขวาง'],['สนามไฟฟ้าและสนามแม่เหล็กของคลื่นตั้งฉากกัน',1,'และตั้งฉากกับทิศการเคลื่อนที่ด้วย'],['ความถี่สูง ความยาวคลื่นก็ยาว',0,'ผกผันกัน f สูง λ สั้น'],['หน่วยของความถี่คือเฮิรตซ์ (Hz)',1,'1 Hz = 1 รอบต่อวินาที'],['โทรศัพท์มือถือและ Wi-Fi ใช้คลื่นวิทยุหรือไมโครเวฟ',1,'ใช้คลื่นแม่เหล็กไฟฟ้าย่านนี้'],['คลื่นวิทยุมองเห็นได้ด้วยตาเปล่า',0,'ตามองไม่เห็น'],['เสาอากาศใช้แปลงสัญญาณไฟฟ้ากับคลื่นวิทยุ',1,'ทั้งส่งและรับ'],['AM ย่อมาจาก Amplitude Modulation',1,'การมอดูเลตแอมพลิจูด'],['1 GHz เท่ากับ 1,000 MHz',1,'G = 10⁹, M = 10⁶'],['ถ้าความยาวคลื่นเพิ่มเป็น 2 เท่า ความถี่จะเพิ่มเป็น 2 เท่า',0,'ความถี่จะลดเหลือครึ่งหนึ่ง'],['คลื่นวิทยุเดินทางเร็วกว่าแสง',0,'เร็วเท่าแสง เพราะเป็นคลื่นแม่เหล็กไฟฟ้าเหมือนกัน'],['มอดูเลชันคือการนำสัญญาณข้อมูลไปกับคลื่นพาหะ',1,'เช่นเสียงไปกับคลื่นวิทยุ'],['สถานี AM ฟังได้ไกลกว่าในตอนกลางคืน',1,'ไอโอโนสเฟียร์สะท้อนได้ดีขึ้นตอนกลางคืน']]);
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function newQ(){Q=sh(QB).slice(0,10)}
+newQ();qshow();
 // exercises
 var E=[
 {q:'คลื่นวิทยุเป็นคลื่นชนิดใด',o:['คลื่นกล','คลื่นแม่เหล็กไฟฟ้า','คลื่นเสียง','คลื่นน้ำ'],a:1,e:'คลื่นวิทยุเป็นคลื่นแม่เหล็กไฟฟ้า ไม่ต้องใช้ตัวกลาง'},
@@ -211,16 +279,67 @@ function rEx(){var h='';E.forEach(function(it,i){h+='<div class="card" id="e'+i+
  h+=it.o?opts(it,i):'<div style="margin-top:8px"><input type="number" step="any" id="n'+i+'" aria-label="คำตอบ"> '+it.u+' <button class="b" data-c="'+i+'">ตรวจ</button></div>';
  h+='<div class="fb" id="f'+i+'"></div></div>'});$('#el').innerHTML=h;exs={};sumE()}
 var exs={};
-function sumE(){var n=Object.keys(exs).length,s=0;for(var k in exs)if(exs[k])s++;$('#es').innerHTML='ทำแล้ว '+n+'/8 ข้อ · ถูก '+s+' ข้อ';}
-function fbE(i,ok){exs[i]=ok;var f=$('#f'+i);f.className='fb '+(ok?'ok':'bad');f.textContent=(ok?'✅ ถูกต้อง · ':'❌ ยังไม่ถูก · ')+E[i].e;sumE()}
+function sumE(){var n=Object.keys(exs).length,s=0;for(var k in exs)if(exs[k])s++;$('#es').innerHTML='ทำแล้ว '+n+'/'+E.length+' ข้อ · ถูก '+s+' ข้อ';}
+function fbE(i,ok){exs[i]=ok;if(ok)pop($('#e'+i+' .fb'));var f=$('#f'+i);f.className='fb '+(ok?'ok':'bad');f.textContent=(ok?'✅ ถูกต้อง · ':'❌ ยังไม่ถูก · ')+E[i].e;sumE()}
 $('#el').onclick=function(ev){var b=ev.target.closest('button');if(!b)return;
  if(b.dataset.c!==undefined){var i=+b.dataset.c,v=parseFloat($('#n'+i).value);if(isNaN(v))return;fbE(i,Math.abs(v-E[i].n)<=E[i].t)}
  else if(b.dataset.j!==undefined){var i=+b.dataset.i,j=+b.dataset.j,ok=j===E[i].a;
   document.querySelectorAll('#e'+i+' .opt').forEach(function(o){o.disabled=true;if(+o.dataset.j===E[i].a)o.classList.add('ok')});if(!ok)b.classList.add('bad');fbE(i,ok)}};
-rEx();
+function mixQ(q){var ix=sh([0,1,2,3]);return {q:q.q,o:ix.map(function(k){return q.o[k]}),a:ix.indexOf(q.a),e:q.e}}
+function rnd(a){return a[Math.floor(Math.random()*a.length)]}
+var EM0=E.filter(function(x){return x.o}).concat([
+{q:'หน่วยของความถี่คือ',o:['เมตร','เฮิรตซ์','วินาที','วัตต์'],a:1,e:'ความถี่วัดเป็นเฮิรตซ์ (Hz) = รอบต่อวินาที'},
+{q:'1 MHz เท่ากับกี่ Hz',o:['10³','10⁶','10⁹','10¹²'],a:1,e:'M = เมกะ = 10⁶'},
+{q:'คลื่นตามขวางหมายถึง',o:['ทิศสั่นตั้งฉากกับทิศเคลื่อนที่','ทิศสั่นขนานทิศเคลื่อนที่','ไม่มีการสั่น','สั่นเป็นวงกลม'],a:0,e:'คลื่นแม่เหล็กไฟฟ้าเป็นคลื่นตามขวาง'},
+{q:'อุปกรณ์ใดแปลงสัญญาณไฟฟ้าเป็นคลื่นวิทยุออกไป',o:['ไมโครโฟน','เสาอากาศส่ง','ลำโพง','แบตเตอรี่'],a:1,e:'เสาอากาศส่งแผ่คลื่นออกสู่อากาศ'},
+{q:'คาบ (T) คือ',o:['เวลาครบ 1 รอบ','จำนวนรอบต่อวินาที','ความยาวคลื่น','ความเร็วคลื่น'],a:0,e:'T = 1/f'},
+{q:'ข้อใดเป็นการใช้ประโยชน์คลื่นวิทยุ',o:['เอกซเรย์กระดูก','กระจายเสียงวิทยุ','อบฆ่าเชื้อด้วย UV','ถ่ายภาพความร้อน'],a:1,e:'สถานีวิทยุใช้คลื่นวิทยุ ส่วนข้ออื่นใช้คลื่นชนิดอื่น'},
+{q:'แอมพลิจูดบอกถึงอะไร',o:['ความแรงของคลื่น','จำนวนรอบ','ความยาวคลื่น','ทิศคลื่น'],a:0,e:'แอมพลิจูดยิ่งมาก คลื่นยิ่งแรง'},
+{q:'คลื่นอวกาศเหมาะกับงานใด',o:['สถานี AM ข้ามประเทศ','ดาวเทียมสื่อสาร','สื่อสารใต้ดินลึก','สื่อสารใต้น้ำ'],a:1,e:'คลื่นอวกาศวิ่งเป็นเส้นตรงทะลุไอโอโนสเฟียร์ เหมาะกับดาวเทียม'}]);
+var GN=[
+function(){var f=rnd([50,60,75,80,100,120,150,200,250,300]),l=300/f;return {q:'คลื่นวิทยุความถี่ '+f+' MHz มีความยาวคลื่นกี่เมตร',n:l,t:Math.max(.02,l*.01),u:'m',e:'λ = 300 ÷ '+f+' = '+l+' m'}},
+function(){var l=rnd([1,1.5,2,2.5,3,4,5,6,10,12]),f=300/l;return {q:'คลื่นวิทยุความยาวคลื่น '+l+' m มีความถี่กี่ MHz',n:f,t:Math.max(.02,f*.01),u:'MHz',e:'f = 300 ÷ '+l+' = '+f+' MHz'}},
+function(){var f=rnd([500,600,750,1000,1200,1500]),l=300000/f;return {q:'สถานี AM ความถี่ '+f+' kHz มีความยาวคลื่นกี่เมตร',n:l,t:Math.max(.5,l*.01),u:'m',e:'λ = 3×10⁸ ÷ ('+f+'×10³) = '+l+' m'}},
+function(){var f=rnd([10,20,25,40,50,100,125,200]),T=1000/f;return {q:'คลื่นความถี่ '+f+' MHz มีคาบกี่นาโนวินาที (ns)',n:T,t:Math.max(.05,T*.01),u:'ns',e:'T = 1 ÷ f = 1000 ÷ '+f+' = '+T+' ns'}},
+function(){var l=rnd([200,300,400,500,600,1000]),f=300000/l;return {q:'คลื่น AM ความยาวคลื่น '+l+' m มีความถี่กี่ kHz',n:f,t:Math.max(.5,f*.01),u:'kHz',e:'f = 300000 ÷ '+l+' = '+f+' kHz'}}];
+function genE(){E=sh(EM0).slice(0,6).map(mixQ).concat(sh(GN).slice(0,4).map(function(g){return g()}))}
+$('#re').onclick=function(){genE();rEx()};
+var TSB=TS.concat([
+{q:'ความถี่ 75 MHz มีความยาวคลื่นกี่เมตร',o:['2 m','4 m','5 m','7.5 m'],a:1},
+{q:'คลื่นยาว 5 m มีความถี่กี่ MHz',o:['15','60','150','1500'],a:1},
+{q:'คลื่นความถี่ 1 MHz มีความยาวคลื่นเท่าใด',o:['30 m','300 m','3000 m','3 m'],a:1},
+{q:'คลื่น 50 MHz มีคาบเท่าใด',o:['2 ns','20 ns','50 ns','200 ns'],a:1},
+{q:'AM ย่อมาจากคำใด',o:['Amplitude Modulation','Automatic Mode','Audio Mixer','Antenna Mode'],a:0},
+{q:'ข้อใดไม่ใช่คลื่นแม่เหล็กไฟฟ้า',o:['คลื่นวิทยุ','แสง','คลื่นเสียง','รังสีเอกซ์'],a:2},
+{q:'สนามไฟฟ้าและสนามแม่เหล็กของคลื่นวิทยุตั้งฉากกับกันและตั้งฉากกับ',o:['ทิศการเคลื่อนที่','ผิวโลก','แอมพลิจูด','ความถี่'],a:0},
+{q:'ถ้าความถี่เพิ่มเป็น 2 เท่า ความยาวคลื่นจะ',o:['เพิ่ม 2 เท่า','ลดเหลือครึ่งหนึ่ง','เท่าเดิม','เพิ่ม 4 เท่า'],a:1},
+{q:'ชั้นไอโอโนสเฟียร์ทำหน้าที่ใดในการสื่อสาร',o:['สะท้อนคลื่นวิทยุบางย่านกลับสู่โลก','ผลิตคลื่นวิทยุ','ดูดซับทุกคลื่น','ขยายเสียง'],a:0},
+{q:'เสาอากาศรับทำหน้าที่ใด',o:['แปลงคลื่นวิทยุเป็นสัญญาณไฟฟ้า','ผลิตไฟฟ้า','ขยายเสียงลำโพง','กรองน้ำ'],a:0},
+{q:'คลื่นความถี่ 300 MHz มีความยาวคลื่นกี่เมตร',o:['0.1 m','1 m','3 m','10 m'],a:1},
+{q:'ข้อใดมีความยาวคลื่นสั้นที่สุด',o:['AM 1 MHz','FM 100 MHz','ไมโครเวฟ 2 GHz','HF 10 MHz'],a:2},
+{q:'ความเร็วคลื่นวิทยุในอากาศใกล้เคียงกับ',o:['3×10⁸ m/s','340 m/s','3×10⁴ m/s','3×10¹² m/s'],a:0},
+{q:'คลื่นที่เดินทางไปตามผิวโลกคือ',o:['คลื่นดิน','คลื่นฟ้า','คลื่นอวกาศ','คลื่นน้ำ'],a:0},
+{q:'FM เปลี่ยนค่าใดของคลื่นพาหะตามเสียง',o:['ความถี่','แอมพลิจูด','ความเร็ว','ขนาดเสาอากาศ'],a:0},
+{q:'AM เปลี่ยนค่าใดของคลื่นพาหะตามเสียง',o:['แอมพลิจูด','ความถี่','ความเร็ว','ความยาวเสา'],a:0},
+{q:'1 GHz เท่ากับ',o:['10⁶ Hz','10⁹ Hz','10¹² Hz','10³ Hz'],a:1},
+{q:'คลื่นแบบใดต้องใช้ตัวกลาง',o:['เสียง','วิทยุ','ไมโครเวฟ','แสง'],a:0},
+{q:'คลื่นความถี่ 100 kHz มีความยาวคลื่นกี่เมตร',o:['30 m','300 m','3000 m','30000 m'],a:2},
+{q:'ข้อใดเกี่ยวกับ T และ f ถูกต้อง',o:['T = 1/f','T = f','T = f×λ','T = λ/f'],a:0}]);
+var THM=[['sky','☁️','ท้องฟ้า','☁️ ✨ 📡 🌟 📻'],['sea','🌊','ทะเล','🌊 🐚 🐬 ⚓ 🫧'],['sunset','🌇','พระอาทิตย์ตก','🌇 🌅 🕊️ ✨ 🧡'],['forest','🌿','ป่า','🌿 🦋 🍃 🌳 🐞'],['space','🪐','อวกาศ','🪐 🚀 ⭐ 🌙 👽'],['candy','🍭','ลูกอม','🍭 🧁 💖 🎀 🍬']];
+$('#sw').innerHTML=THM.map(function(t,i){return '<button data-i="'+i+'">'+t[1]+' '+t[2]+'</button>'}).join('');
+function setTh(i){var t=THM[i]||THM[0];document.body.dataset.bg=t[0];$('.bg').innerHTML=t[3].split(' ').map(function(e){return '<i>'+e+'</i>'}).join('');document.querySelectorAll('#sw button').forEach(function(b,k){b.classList.toggle('on',THM[k]===t)});try{localStorage.setItem('rw-bg',THM.indexOf(t))}catch(e){}}
+$('#sw').onclick=function(e){var b=e.target.closest('button');if(b)setTh(+b.dataset.i)};
+$('#pal').onclick=function(){$('#sw').classList.toggle('open')};
+var mq=matchMedia('(prefers-color-scheme:dark)'),md=null;try{md=localStorage.getItem('rw-md')}catch(e){}
+function setMd(m,save){md=m;document.documentElement.dataset.theme=m;$('#md').textContent=m==='dark'?'☀️':'🌙';$('#md').title=m==='dark'?'โหมดสว่าง':'โหมดมืด';if(save){try{localStorage.setItem('rw-md',m)}catch(e){}}}
+setMd(md||(mq.matches?'dark':'light'),false);
+$('#md').onclick=function(){setMd(md==='dark'?'light':'dark',true)};
+if(mq.addEventListener)mq.addEventListener('change',function(e){var s=null;try{s=localStorage.getItem('rw-md')}catch(x){}if(!s)setMd(e.matches?'dark':'light',false)});
+var si=0;try{si=+localStorage.getItem('rw-bg')||0}catch(e){}setTh(si);
+genE();rEx();
 // test
 var ans={},done=false;
-function rT(){var h='';TS.forEach(function(it,i){h+='<div class="card" id="t'+i+'"><b>'+(i+1)+'. '+it.q+'</b>'+opts(it,i)+'</div>'});$('#tl').innerHTML=h;ans={};done=false;$('#tr').innerHTML='';$('#sub').textContent='ส่งคำตอบ'}
+function rT(){TS=sh(TSB).slice(0,10).map(mixQ);var h='';TS.forEach(function(it,i){h+='<div class="card" id="t'+i+'"><b>'+(i+1)+'. '+it.q+'</b>'+opts(it,i)+'</div>'});$('#tl').innerHTML=h;ans={};done=false;$('#tr').innerHTML='';$('#sub').textContent='ส่งคำตอบ'}
 $('#tl').onclick=function(ev){var b=ev.target.closest('.opt');if(!b||done)return;var i=+b.dataset.i;ans[i]=+b.dataset.j;
  document.querySelectorAll('#t'+i+' .opt').forEach(function(o){o.classList.toggle('sel',o===b)})};
 $('#sub').onclick=function(){if(done){rT();window.scrollTo(0,0);return}
@@ -228,6 +347,6 @@ $('#sub').onclick=function(){if(done){rT();window.scrollTo(0,0);return}
  var s=0;TS.forEach(function(it,i){var ok=ans[i]===it.a;if(ok)s++;
   document.querySelectorAll('#t'+i+' .opt').forEach(function(o){var j=+o.dataset.j;o.disabled=true;if(j===it.a)o.classList.add('ok');else if(j===ans[i])o.classList.add('bad')})});
  done=true;var g=s>=9?'ยอดเยี่ยม! 🏆':s>=7?'ดีมาก 👍':s>=5?'ผ่านเกณฑ์ ทบทวนอีกนิด':'ลองกลับไปเล่นเกมและทำแบบฝึกหัดอีกครั้ง';
- $('#tr').innerHTML='<div class="big">'+s+' / '+TS.length+'</div><div>'+g+'</div><div class="mut">ข้อที่เป็นสีเขียวคือคำตอบที่ถูกต้อง</div>';$('#sub').textContent='ทำใหม่'};
+ $('#tr').innerHTML='<div class="big">'+s+' / '+TS.length+'</div><div>'+g+'</div><div class="mut">ข้อที่เป็นสีเขียวคือคำตอบที่ถูกต้อง</div>';$('#sub').textContent='ทำใหม่';if(s>=7)pop($('#tr'),16)};
 rT();
 </script></body></html>
